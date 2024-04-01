@@ -1,7 +1,0 @@
-.config/*
-
-!.config/nvim
-!.config/starship.toml
-!.config/waybar
-!.config/alacritty
-!.config/hypr
