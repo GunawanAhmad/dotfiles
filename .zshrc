@@ -100,6 +100,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# add go to env var
+export PATH=$PATH:/usr/local/go/bin
+
+
 #Starship eval
 eval "$(starship init zsh)"
 

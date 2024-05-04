@@ -8,6 +8,12 @@ return {
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
 	config = function()
-		vim.keymap.set("n", "<C-b>", ":Neotree filesystem toggle left<CR>", {})
+		vim.keymap.set("n", "<C-b>", ":Neotree filesystem toggle right<CR>", {})
+
+    require("neo-tree").setup({
+      window = {
+        position = "right"
+      }
+    })
 	end,
 }
