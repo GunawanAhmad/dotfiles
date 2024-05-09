@@ -6,6 +6,8 @@ vim.cmd("set number")
 vim.cmd("set wrap linebreak")
 vim.cmd("set clipboard=unnamedplus")
 vim.keymap.set("n", "<C-s>", ":w<CR>")
+vim.keymap.set("n", "<C-k>", "<C-u>")
+vim.keymap.set("n", "<C-j>", "<C-d>")
 vim.g.mapleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
