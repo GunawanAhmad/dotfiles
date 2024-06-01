@@ -103,6 +103,8 @@ source $ZSH/oh-my-zsh.sh
 # add go to env var
 export PATH=$PATH:/usr/local/go/bin
 
+export PATH=$PATH:$HOME/.local/bin
+
 
 #Starship eval
 eval "$(starship init zsh)"
