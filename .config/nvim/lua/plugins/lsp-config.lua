@@ -26,8 +26,8 @@ return {
       lspconfig.tailwindcss.setup({ capabilities = capabilities })
       lspconfig.svelte.setup({ capabilities = capabilities })
       lspconfig.remark_ls.setup({ capabilities = capabilities })
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set({ "n" }, "<leader>ca", vim.lsp.buf.code_action, {})
+      vim.keymap.set("n", "<C-k>", vim.lsp.buf.hover, {})
+      vim.keymap.set({ "n" }, "<leader>.", vim.lsp.buf.code_action, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
     end,
   },

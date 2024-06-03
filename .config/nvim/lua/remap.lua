@@ -1,6 +1,10 @@
 vim.keymap.set("n", "<C-s>", ":w<CR>")
-vim.keymap.set("n", "<C-k>", "<C-u>")
-vim.keymap.set("n", "<C-j>", "<C-d>")
+
+-- remap for halp page up and down
+vim.keymap.set("n", "K", "<C-u>")
+vim.keymap.set("n", "J", "<C-d>")
+
+
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "esc", ":noh<return><esc>")
@@ -9,3 +13,4 @@ vim.keymap.set("n", "esc", ":noh<return><esc>")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>Y", "\"+Y")
+
