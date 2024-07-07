@@ -1,5 +1,3 @@
-vim.keymap.set("n", "<C-s>", ":w<CR>")
-
 -- remap for halp page up and down
 vim.keymap.set("n", "K", "<C-u>")
 vim.keymap.set("n", "J", "<C-d>")
