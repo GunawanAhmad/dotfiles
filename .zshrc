@@ -107,7 +107,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/local/go/bin
 
 export PATH=$PATH:$HOME/.local/bin
-
+export PATH=$PATH:$(go env GOPATH)/bin
 
 #Starship eval
 eval "$(starship init zsh)"
