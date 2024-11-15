@@ -23,4 +23,8 @@ map({ "n", "t" }, "<C-t>", function()
   require("nvchad.term").toggle { pos = "sp", id = "htoggleTerm" }
 end, { desc = "terminal toggleable horizontal term" })
 
+map("n", "<C-h>", vim.lsp.buf.hover, { desc = "Hover definition" })
+
+map("n", "gd", vim.lsp.buf.definition, {})
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
