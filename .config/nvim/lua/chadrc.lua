@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-  theme = "gruvbox",
+  theme = "melange",
 
   hl_override = {
     Comment = { italic = true },
@@ -16,7 +16,7 @@ M.base46 = {
 
 M.ui = {
   tabufline = {
-    order = { "buffers", "tabs", "treeOffset" },
+    order = { "buffers", "tabs" },
   },
   telescope = { style = "bordered" },
   statusline = {

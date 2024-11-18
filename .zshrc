@@ -103,6 +103,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#NVIM alias
+alias n="nvim"
+
 # add go to env var
 export PATH=$PATH:/usr/local/go/bin
 

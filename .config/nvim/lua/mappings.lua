@@ -13,9 +13,7 @@ map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
 -- Copy to system clipboard
-map("v", "<leader>y", '"+y', { desc = "Copy" })
-map("n", "<leader>y", '"+y', { desc = "Copy" })
-map("v", "<leader>Y", '"+Y', { desc = "Copy" })
+map("v", "<leader>y", '"+y', { desc = "Copy to clipboard" })
 
 map("n", "X", "<C-w>", { desc = "Navigation prefix" })
 
