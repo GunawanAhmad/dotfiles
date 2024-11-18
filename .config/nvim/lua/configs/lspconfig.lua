@@ -26,10 +26,9 @@ lspconfig.eslint.setup {
 }
 
 -- This config to enable TS on vue or volar. Make sure install @vue/typescript-plugin and make sure the location is pointing to the right location
---
 local function get_current_node_version_on_nvm()
-  local version = vim.fn.system "nvm current"
-  return version
+  local version = vim.fn.system "bash -c 'source $HOME/.nvm/nvm.sh && nvm current'"
+  return vim.trim(version)
 end
 
 lspconfig.ts_ls.setup {
