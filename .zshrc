@@ -117,6 +117,7 @@ eval "$(starship init zsh)"
 
 #alias
 alias ssh-setup="eval \`ssh-agent\` && ssh-add"
+alias n="nvim"
 
 #shortcut for pnpm
 alias pd="pnpm dev"
@@ -135,3 +136,4 @@ export NVM_DIR="$HOME/.nvm"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+alias config='/usr/bin/git --git-dir=/home/guns/dotfiles/ --work-tree=/home/guns'
