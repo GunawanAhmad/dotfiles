@@ -22,11 +22,14 @@ general = "Alacritty"
 instance = "Alacritty"
 
 [window]
-opacity = 0.9
+opacity = 0.95
 blur = true
-padding = { x = 5, y = 5}
+padding = { x = 5, y = 0}
 
 [colors.primary]
 background = "#282828"
+
+[terminal.shell]
+program = "tmux"
 
 
