@@ -1,0 +1,10 @@
+{
+    "diagnostics.disable": [
+        "missing-fields",
+        "different-requires"
+    ],
+    "diagnostics.globals": [
+        "options",
+        "vim"
+    ]
+}
