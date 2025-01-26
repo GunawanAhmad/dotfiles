@@ -32,6 +32,7 @@ require('lazy').setup({
   require 'plugins.sessions',
   require 'plugins.copilot',
   require 'plugins.debugprint',
+  require 'plugins.nvim-colorizer',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
