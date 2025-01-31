@@ -30,6 +30,6 @@ padding = { x = 5, y = 0}
 background = "#282828"
 
 [terminal.shell]
-program = "tmux"
+program = "tmux attach || tmux"
 
 

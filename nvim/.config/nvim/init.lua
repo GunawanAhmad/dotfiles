@@ -18,6 +18,7 @@ require('lazy').setup({
 
   require 'plugins.autopairs',
   require 'plugins.gruvbox',
+  -- require 'plugins.catppucin'
   require 'plugins.nvim-tree',
   require 'plugins.gitsigns',
   require 'plugins.lualine',
@@ -30,7 +31,7 @@ require('lazy').setup({
   require 'plugins.treesitter',
   require 'plugins.startup',
   require 'plugins.sessions',
-  require 'plugins.copilot',
+  -- require 'plugins.copilot',
   require 'plugins.debugprint',
   require 'plugins.nvim-colorizer',
 }, {
