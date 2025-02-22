@@ -19,6 +19,6 @@ return { -- Collection of various small independent plugins/modules
     require('mini.tabline').setup()
     -- require('mini.statusline').setup()
     --
-    require('mini.jump').setup()
+    -- require('mini.jump').setup()
   end,
 }
