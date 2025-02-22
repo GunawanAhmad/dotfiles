@@ -106,6 +106,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 
+
 #Starship eval
 eval "$(starship init zsh)"
 
@@ -130,3 +131,5 @@ export NVM_DIR="$HOME/.nvm"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+eval "$(zoxide init zsh)"
