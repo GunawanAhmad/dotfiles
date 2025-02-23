@@ -29,7 +29,7 @@ require('lazy').setup({
   require 'plugins.mini',
   require 'plugins.lsp',
   require 'plugins.treesitter',
-  require 'pljugins.startup',
+  require 'plugins.startup',
   require 'plugins.sessions',
   -- require 'plugins.copilot',
   require 'plugins.debugprint',
