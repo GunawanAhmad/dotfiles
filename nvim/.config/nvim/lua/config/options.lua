@@ -60,7 +60,7 @@ vim.opt.scrolloff = 10
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 
-vim.opt.laststatus = 4
+vim.opt.laststatus = 3
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode

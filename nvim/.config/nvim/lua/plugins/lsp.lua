@@ -118,10 +118,33 @@ return {
     --   return vim.trim(version)
     -- end
 
+    local border = {
+      { '┌', 'FloatBorder' },
+      { '─', 'FloatBorder' },
+      { '┐', 'FloatBorder' },
+      { '│', 'FloatBorder' },
+      { '┘', 'FloatBorder' },
+      { '─', 'FloatBorder' },
+      { '└', 'FloatBorder' },
+      { '│', 'FloatBorder' },
+    }
+
+    vim.diagnostic.config {
+      virtual_text = {
+        prefix = '● ', -- Could be '●', '▎', 'x', '■', , 
+      },
+      float = { border = border },
+    }
+
+    -- LSP settings (for overriding per client)
+    local handlers = {
+      ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+      ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+    }
+
     local servers = {
       clangd = {},
       gopls = {},
-      golangci_lint_ls = {},
       rust_analyzer = {},
       ts_ls = {
         init_options = {},
@@ -191,6 +214,7 @@ return {
         function(server_name)
           local server = servers[server_name] or {}
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+          server.handlers = handlers
           require('lspconfig')[server_name].setup(server)
         end,
       },
