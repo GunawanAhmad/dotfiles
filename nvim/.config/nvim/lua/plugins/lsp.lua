@@ -142,25 +142,39 @@ return {
       ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
     }
 
+    -- This config to enable TS on vue or volar. Make sure install @vue/typescript-plugin and make sure the location is pointing to the right location
+    local function get_current_node_version_on_nvm()
+      local version = vim.fn.system "bash -c 'source $HOME/.nvm/nvm.sh && nvm current'"
+      return vim.trim(version)
+    end
+
     local servers = {
       clangd = {},
       gopls = {},
       rust_analyzer = {},
-      ts_ls = {
-        init_options = {},
-        filetypes = {
-          'javascript',
-          'typescript',
-          'typescriptreact',
-          'typescript.tsx',
-        },
-      },
+      -- This is removed because we handle ts lsp with volar
+      -- ts_ls = {
+      --   init_options = {},
+      --   filetypes = {
+      --     'javascript',
+      --     'typescript',
+      --     'typescriptreact',
+      --     'typescript.tsx',
+      --   },
+      -- },
       svelte = {},
       volar = {
         filetypes = { 'typescript', 'javascript', 'vue' },
         init_options = {
           vue = {
             hybridMode = false,
+          },
+          plugins = {
+            {
+              name = '@vue/typescript-plugin',
+              location = vim.loop.os_getenv 'NVM_DIR' .. '/versions/node/' .. get_current_node_version_on_nvm() .. '/lib/node_modules/@vue/typescript-plugin',
+              languages = { 'javascript', 'typescript', 'vue' },
+            },
           },
         },
       },
