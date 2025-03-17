@@ -214,6 +214,8 @@ return {
           },
         },
       },
+      bashls = {},
+      shfmt = {},
     }
 
     require('mason').setup()
