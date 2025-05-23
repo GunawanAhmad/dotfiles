@@ -31,11 +31,13 @@ require('lazy').setup({
   require 'plugins.treesitter',
   require 'plugins.startup',
   require 'plugins.sessions',
-  -- require 'plugins.copilot',
+  require 'plugins.copilot',
   require 'plugins.debugprint',
   require 'plugins.nvim-colorizer',
   require 'plugins.flash',
-  require 'plugins.yazi'
+  require 'plugins.yazi',
+  require 'plugins.codecompanion',
+  require 'plugins.render-markdown',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

@@ -16,7 +16,7 @@ return {
       timeout = 500,
     },
     view = {
-      width = 30,
+      width = 50,
       preserve_window_proportions = true,
       side = 'right',
     },
