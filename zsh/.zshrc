@@ -70,3 +70,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 eval "$(zoxide init zsh)"
 
 alias streams=systemctl list-units | grep stream
+alias cd="z"

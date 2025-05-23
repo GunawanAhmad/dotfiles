@@ -1,0 +1,65 @@
+{
+    "margin": "5 5 0 5",
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-right": ["clock", "pulseaudio", "network", "battery", "tray"],
+
+
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%a, %d %b, %I:%M %p}"
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+        "headphones": "",
+        "handsfree": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", ""]
+      },
+      "scroll-step": 1,
+      "on-click": "pavucontrol"
+    },
+
+    "network": {
+      "format": "{icon}",
+      "format-alt": "{ipaddr}/{cidr} {icon}",
+      "format-alt-click": "click-right",
+      "format-wifi": "<span font='Font Awesome 5 Free 10'></span>  {ipaddr}",
+      "format-ethernet": " {ifname}",
+      "format-disconnected": "⚠ Disconnected",
+      "tooltip": false
+    },
+
+    "custom/mem": {
+        "format": "{} ",
+        "interval": 3,
+        "exec": "free -h | awk '/Mem:/{printf $3}'",
+        "tooltip": false,
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "interval": 20,
+	      "on-update": "$HOME/.config/waybar/scripts/check_battery.sh",
+    },
+
+    "tray": {
+        "icon-size": 12,
+        "spacing": 0
+    },
+}
