@@ -17,7 +17,8 @@ require('lazy').setup({
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
   require 'plugins.autopairs',
-  require 'plugins.gruvbox',
+  require 'plugins.themes.gruvbox',
+  -- require 'plugins.themes.kanagawa-paper',
   -- require 'plugins.catppucin'
   require 'plugins.nvim-tree',
   require 'plugins.gitsigns',
@@ -38,6 +39,7 @@ require('lazy').setup({
   require 'plugins.yazi',
   require 'plugins.codecompanion',
   require 'plugins.render-markdown',
+  require 'plugins.snipe'
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

@@ -16,7 +16,7 @@ return { -- Collection of various small independent plugins/modules
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
 
-    require('mini.tabline').setup()
+    -- require('mini.tabline').setup()
     -- require('mini.statusline').setup()
     --
     -- require('mini.jump').setup()

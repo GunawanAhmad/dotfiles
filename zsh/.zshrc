@@ -3,8 +3,6 @@ if [ -z "$TMUX" ]; then
   tmux attach || tmux new-session
 fi
 
-neofetch
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -71,3 +69,6 @@ eval "$(zoxide init zsh)"
 
 alias streams=systemctl list-units | grep stream
 alias cd="z"
+
+
+export XDG_DESKTOP_PORTAL_IMPLEMENTATION=xdg-desktop-portal-wlr

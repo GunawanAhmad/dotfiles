@@ -216,6 +216,17 @@ return {
       },
       bashls = {},
       shfmt = {},
+      pyright = {
+        settings = {
+          python = {
+            analysis = {
+              typeCheckingMode = 'off',
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+            },
+          },
+        },
+      },
     }
 
     require('mason').setup()
