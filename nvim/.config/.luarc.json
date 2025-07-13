@@ -1,7 +1,8 @@
 {
     "diagnostics.disable": [
         "missing-fields",
-        "different-requires"
+        "different-requires",
+        "undefined-doc-name"
     ],
     "diagnostics.globals": [
         "options",

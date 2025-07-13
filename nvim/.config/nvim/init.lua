@@ -39,7 +39,8 @@ require('lazy').setup({
   require 'plugins.yazi',
   require 'plugins.codecompanion',
   require 'plugins.render-markdown',
-  require 'plugins.snipe'
+  require 'plugins.snipe',
+  require 'plugins.discord-presence',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
