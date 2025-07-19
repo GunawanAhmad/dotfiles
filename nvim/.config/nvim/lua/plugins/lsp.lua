@@ -152,6 +152,12 @@ return {
       clangd = {},
       gopls = {},
       rust_analyzer = {},
+      golangci_lint_ls = {
+       filetypes = { 'go', 'gomod' },
+        init_options = {
+          command = { 'golangci-lint', 'run', '--output.json.path=stdout', '--show-stats=false' },
+        },
+      },
       -- This is removed because we handle ts lsp with volar
       -- ts_ls = {
       --   init_options = {},
