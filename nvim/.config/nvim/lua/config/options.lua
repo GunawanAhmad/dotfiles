@@ -8,7 +8,7 @@ vim.g.have_nerd_font = true
 -- make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.mouse = 'a'
+vim.opt.mouse = ''
 vim.opt.linebreak = true
 
 -- don't show the mode, since it's already in the status line
@@ -59,6 +59,8 @@ vim.opt.scrolloff = 10
 
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
+
+vim.o.winborder = 'rounded'
 
 vim.opt.laststatus = 3
 

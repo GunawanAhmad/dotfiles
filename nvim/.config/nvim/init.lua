@@ -32,16 +32,18 @@ require('lazy').setup({
   require 'plugins.treesitter',
   require 'plugins.startup',
   require 'plugins.sessions',
-  -- require 'plugins.copilot',
-  require 'plugins.supermaven',
+  require 'plugins.copilot',
+  -- require 'plugins.markview',
+  -- require 'plugins.supermaven',
   require 'plugins.debugprint',
   require 'plugins.nvim-colorizer',
   require 'plugins.flash',
   require 'plugins.yazi',
-  require 'plugins.codecompanion',
-  require 'plugins.render-markdown',
+  -- require 'plugins.render-markdown',
   require 'plugins.snipe',
   require 'plugins.discord-presence',
+  require 'plugins.fff',
+  require 'plugins.codecompanion',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

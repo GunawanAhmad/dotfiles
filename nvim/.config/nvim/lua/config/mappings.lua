@@ -43,7 +43,5 @@ map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = 'Open
 -- Select all
 map('n', '<C-a>', 'ggvG', { desc = 'Select all text' })
 
-map('n', '<leader>ai', '<cmd>CodeCompanionChat Toggle<CR>', { desc = 'Toggle code AI' })
-
--- mapping esc to escpace terminal mode
-map('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
+map('n', '<leader>ai', '<cmd>CodeCompanionChat Toggle<CR>', { desc = '' })
+map('v', '<leader>cc', ":'<,'>CodeCompanion<CR>", { desc = '', noremap = true, silent = true })

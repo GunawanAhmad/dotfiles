@@ -39,6 +39,8 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 
+# add emacs doom to path
+export PATH=$PATH:$HOME/.config/emacs/bin
 
 #Starship eval
 eval "$(starship init zsh)"

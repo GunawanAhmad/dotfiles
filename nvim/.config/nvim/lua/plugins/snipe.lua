@@ -9,5 +9,16 @@ return {
       desc = 'Open Snipe buffer menu',
     },
   },
-  opts = {},
+  opts = {
+    ui = {
+      position = 'center',
+      persist_tasge = true,
+    },
+    hints = {
+      dictionary = 'abcdefimnopsuvw',
+    },
+    navigate = {
+      cancel_snipe = { 'q', '<esc>' },
+    },
+  },
 }
