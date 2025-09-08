@@ -59,19 +59,28 @@ return {
       filetypes = tsserver_filetypes,
     }
 
-    local ts_ls_config = {
-      init_options = {
-        plugins = {
-          vue_plugin,
-        },
-      },
-      filetypes = tsserver_filetypes,
-    }
+    -- local ts_ls_config = {
+    --   init_options = {
+    --     plugins = {
+    --       vue_plugin,
+    --     },
+    --   },
+    --   filetypes = tsserver_filetypes,
+    -- }
+    --
+
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = 0,
+      callback = function()
+        print 'Formatting...'
+        vim.lsp.buf.formatting_sync(nil, 1000)
+      end,
+    })
 
     local config = {
       vue_ls = {},
       vtsls = vtsls_config,
-      ts_ls = ts_ls_config,
+      -- ts_ls = ts_ls_config,
       lua_ls = {},
       gopls = {},
       eslint = {},
@@ -91,7 +100,6 @@ return {
     require('mason').setup {
       ensure_installed = {
         'vue-language-server',
-        'typescript-language-server',
         'lua-language-server',
         'gopls',
         'eslint',

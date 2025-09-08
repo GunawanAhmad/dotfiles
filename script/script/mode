@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# check if a mode argument is provided
+if [ -z "$1" ]; then
+	echo "Usage: $0 <mode>"
+	echo "Modes:"
+	echo "1 - Personal mode"
+	echo "2 - Office mode"
+	exit 1
+fi
+
+MODE=$1
+
+if [ "$MODE" -eq 1 ]; then
+	echo "Setting up personal mode..."
+	xrandr --output DP-2 --off --output eDP-1 --auto --primary # setting laptop screen as primary
+	setxkbmap -layout us
+elif [ "$MODE" -eq 2 ]; then
+	echo "Setting up office mode..."
+	xrandr --output eDP-1 --off --output DP-2 --auto --primary # setting external monitor as primary
+
+	# Clear existing modifier mappings
+	xmodmap -e "clear control"
+	xmodmap -e "clear mod1"
+
+	# Swap key mappings
+	xmodmap -e "keycode 108 = Control_R"
+	xmodmap -e "keycode 105 = Alt_R Meta_R"
+
+	# Re-add modifiers
+	xmodmap -e "add control = Control_L Control_R"
+	xmodmap -e "add mod1 = Alt_R Meta_R"
+else
+	echo "Invalid mode. Use 1 for personal mode or 2 for office mode."
+	exit 1
+fi

@@ -42,6 +42,8 @@ export PATH=$PATH:$(go env GOPATH)/bin
 # add emacs doom to path
 export PATH=$PATH:$HOME/.config/emacs/bin
 
+export PATH=$PATH:$HOME/dotfiles/script/script
+
 #Starship eval
 eval "$(starship init zsh)"
 
@@ -69,8 +71,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$(zoxide init zsh)"
 
-alias streams=systemctl list-units | grep stream
-alias cd="z"
+# alias cd="z"
 
 
 export XDG_DESKTOP_PORTAL_IMPLEMENTATION=xdg-desktop-portal-wlr

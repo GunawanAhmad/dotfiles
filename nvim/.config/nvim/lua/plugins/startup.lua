@@ -33,7 +33,7 @@ return {
             key = 'ff',
             desc = 'Find files',
             key_format = '    %s', -- remove default surrounding `[]`
-            action = 'Telescope find_files',
+            action = 'lua require("fff").find_files()',
           },
           {
             icon = '󰈭  ',
@@ -47,7 +47,7 @@ return {
             desc = 'Sessions',
             key = 's',
             key_format = '    %s', -- remove default surrounding `[]`
-            action = 'SessionLoad',
+            action = 'lua require("persistence").load()',
           },
         },
         footer = {

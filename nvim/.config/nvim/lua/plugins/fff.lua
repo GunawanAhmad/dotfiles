@@ -1,22 +1,23 @@
 return {
-  "dmtrKovalenko/fff.nvim",
-  build = "cargo build --release",
+  'dmtrKovalenko/fff.nvim',
+  build = 'cargo build --release',
   -- or if you are using nixos
   -- build = "nix run .#release",
   opts = {
     -- pass here all the options
     keymaps = {
-      move_up = {"<C-k>", "<Up>"},
-      move_down = {"<C-j>", "<Down>"},
-    }
+      move_up = { '<C-k>', '<Up>' },
+      move_down = { '<C-j>', '<Down>' },
+    },
+    prompt = '',
   },
   keys = {
     {
-      "ff", -- try it if you didn't it is a banger keybinding for a picker
+      'ff', -- try it if you didn't it is a banger keybinding for a picker
       function()
-        require("fff").find_files() -- or find_in_git_root() if 
+        require('fff').find_files() -- or find_in_git_root() if
       end,
-      desc = "Open file picker",
+      desc = 'Open file picker',
     },
   },
 }

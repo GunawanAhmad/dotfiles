@@ -35,7 +35,7 @@ exec --no-startup-id polybar
 
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf -b
 
-exec_always  feh --bg-scale ~/Pictures/wallpapers/frieren5.jpg
+exec_always  feh --bg-fill ~/Pictures/wallpapers/skull.png
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -171,6 +171,9 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exit
 
+# toggle the visibility of the bar
+bindsym $mod+n exec "polybar-msg cmd toggle"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         bindsym j resize shrink width 10 px or 10 ppt
@@ -200,6 +203,5 @@ default_floating_border pixel 1
 
 # Startup app
 exec --no-startup-id sh -c 'sleep 0.2; i3-msg "workspace $ws1; exec kitty"'
-exec --no-startup-id sh -c 'sleep 1; i3-msg "workspace $ws2; exec brave-browser"'
 
 focus_on_window_activation focus

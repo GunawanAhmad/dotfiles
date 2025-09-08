@@ -31,19 +31,19 @@ require('lazy').setup({
   require 'plugins.lsp',
   require 'plugins.treesitter',
   require 'plugins.startup',
-  require 'plugins.sessions',
+  -- require 'plugins.sessions',
   require 'plugins.copilot',
   -- require 'plugins.markview',
-  -- require 'plugins.supermaven',
   require 'plugins.debugprint',
   require 'plugins.nvim-colorizer',
   require 'plugins.flash',
   require 'plugins.yazi',
-  -- require 'plugins.render-markdown',
+  require 'plugins.render-markdown',
   require 'plugins.snipe',
   require 'plugins.discord-presence',
   require 'plugins.fff',
   require 'plugins.codecompanion',
+  require 'plugins.persistence'
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
@@ -66,3 +66,7 @@ require('lazy').setup({
 
 require 'config.options'
 require 'config.mappings'
+
+vim.api.nvim_create_user_command('Ti', function()
+  print(os.date '%H:%M')
+end, { desc = 'Display the current time' })
