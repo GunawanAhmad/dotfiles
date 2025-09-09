@@ -4,18 +4,18 @@ return { -- Fuzzy Finder (files, lsp, etc)
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    { -- If encountering errors, see telescope-fzf-native README for installation instructions
-      'nvim-telescope/telescope-fzf-native.nvim',
-
-      -- `build` is used to run some command when the plugin is installed/updated.
-      -- This is only run then, not every time Neovim starts up.
-      build = 'make',
-
-      -- `cond` is a condition used to determine whether this plugin should be
-      -- installed and loaded.
-      cond = function()
-        return vim.fn.executable 'make' == 1
-      end,
+    -- { -- If encountering errors, see telescope-fzf-native README for installation instructions
+    --   'nvim-telescope/telescope-fzy-native.nvim',
+    --
+    --   -- `build` is used to run some command when the plugin is installed/updated.
+    --   -- This is only run then, not every time Neovim starts up.
+    --   build = 'make',
+    -- },
+    {
+      'altermo/telescope-nucleo-sorter.nvim',
+      build = 'cargo build --release',
+      -- on macos, you may need below to make build work
+      -- build = 'cargo rustc --release -- -C link-arg=-undefined -C link-arg=dynamic_lookup',
     },
     { 'nvim-telescope/telescope-ui-select.nvim' },
 
@@ -29,10 +29,19 @@ return { -- Fuzzy Finder (files, lsp, etc)
           require('telescope.themes').get_dropdown(),
         },
       },
+      pickers = {
+        find_files = {
+          find_command = { 'rg', '--files', '--sortr=modified' },
+          hidden = true,
+          no_ignore = true,
+        },
+      },
     }
 
     -- Enable Telescope extensions if they are installed
-    pcall(require('telescope').load_extension, 'fzf')
+    -- pcall(require('telescope').load_extension, 'fzf')
+
+    pcall(require('telescope').load_extension, 'nucleo')
     pcall(require('telescope').load_extension, 'ui-select')
 
     -- See `:help telescope.builtin`

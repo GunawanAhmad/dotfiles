@@ -1,3 +1,10 @@
+local function eslintFormat()
+  if vim.fn.exists ':LspEslintFixAll' == 2 then
+    vim.cmd 'LspEslintFixAll'
+  end
+  return {}
+end
+
 return { -- Autoformat
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },
@@ -18,14 +25,15 @@ return { -- Autoformat
       lua = { 'stylua' },
       sql = { 'sql_formatter' },
       go = { 'goimports', 'gofmt' },
-      javascript = { 'eslint' },
-      typescript = { 'eslint' },
-      javascriptreact = { 'eslint' },
-      typescriptreact = { 'eslint' },
+      javascript = eslintFormat,
+      typescript = eslintFormat,
+      javascriptreact = eslintFormat,
+      typescriptreact = eslintFormat,
+      vue = eslintFormat,
     },
-    -- format_on_save = {
-    --   timeout_ms = 500,
-    --   lsp_format = 'fallback',
-    -- },
+    format_on_save = {
+      timeout_ms = 500,
+      lsp_format = 'never',
+    },
   },
 }

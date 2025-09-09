@@ -9,7 +9,7 @@ return {
       move_up = { '<C-k>', '<Up>' },
       move_down = { '<C-j>', '<Down>' },
     },
-    prompt = '',
+    prompt = ' '  ,
   },
   keys = {
     {
