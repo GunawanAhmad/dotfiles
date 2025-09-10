@@ -1,4 +1,4 @@
-local function eslintFormat()
+local function jsFormat()
   if vim.fn.exists ':LspEslintFixAll' == 2 then
     vim.cmd 'LspEslintFixAll'
   end
@@ -25,11 +25,11 @@ return { -- Autoformat
       lua = { 'stylua' },
       sql = { 'sql_formatter' },
       go = { 'goimports', 'gofmt' },
-      javascript = eslintFormat,
-      typescript = eslintFormat,
-      javascriptreact = eslintFormat,
-      typescriptreact = eslintFormat,
-      vue = eslintFormat,
+      javascript = jsFormat,
+      typescript = jsFormat,
+      javascriptreact = jsFormat,
+      typescriptreact = jsFormat,
+      vue = jsFormat,
     },
     format_on_save = {
       timeout_ms = 500,

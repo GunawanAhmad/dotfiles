@@ -8,6 +8,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require 'config.options'
+require 'config.mappings'
+
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
@@ -21,6 +24,7 @@ require('lazy').setup({
   -- require 'plugins.themes.kanagawa-paper',
   -- require 'plugins.catppucin'
   require 'plugins.nvim-tree',
+
   require 'plugins.gitsigns',
   require 'plugins.lualine',
   require 'plugins.which-key',
@@ -41,7 +45,8 @@ require('lazy').setup({
   require 'plugins.discord-presence',
   require 'plugins.fff',
   require 'plugins.codecompanion',
-  require 'plugins.persistence'
+  require 'plugins.persistence',
+  require 'plugins.lazygit',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
@@ -61,9 +66,6 @@ require('lazy').setup({
     },
   },
 })
-
-require 'config.options'
-require 'config.mappings'
 
 vim.api.nvim_create_user_command('Ti', function()
   print(os.date '%H:%M')

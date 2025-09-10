@@ -9,7 +9,7 @@ return {
         theme = 'auto',
       },
       sections = {
-        lualine_a = { 'ctime', 'mode' },
+        lualine_a = { 'mode' },
         lualine_b = { 'branch' },
         lualine_c = { 'filename' },
         lualine_x = { 'searchcount', 'diagnostics', 'filetype' },
