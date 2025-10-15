@@ -35,7 +35,7 @@ exec --no-startup-id polybar
 
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf -b
 
-exec_always  feh --bg-fill ~/Pictures/wallpapers/skull.png
+exec_always  feh --bg-fill ~/Pictures/wallpapers/momo.png
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -70,6 +70,9 @@ bindsym $mod+Shift+c kill
 bindsym $mod+d exec --no-startup-id "rofi -show drun"
 
 bindsym Print exec --no-startup-id "gnome-screenshot -acf /tmp/test && cat /tmp/test | xclip -i -selection clipboard -target image/png"
+
+# change monitor
+bindsym $mod+m exec "/home/guns/dotfiles/script/script/monitor"
 
 # change focus
 bindsym $mod+j focus down
@@ -203,5 +206,8 @@ default_floating_border pixel 1
 
 # Startup app
 exec --no-startup-id sh -c 'sleep 0.2; i3-msg "workspace $ws1; exec kitty"'
+exec --no-startup-id sh -c 'sleep 0.4; i3-msg "workspace $ws2; exec brave-browser"'
+exec --no-startup-id sh -c 'sleep 0.8; i3-msg "workspace $ws7; exec slack"'
 
 focus_on_window_activation focus
+

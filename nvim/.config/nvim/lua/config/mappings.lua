@@ -14,7 +14,7 @@ map('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move line up' })
 map('v', '<leader>y', '"+y', { desc = 'Copy to clipboard' })
 
 map('n', 'X', '<C-w>', { desc = 'Navigation prefix' })
-map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>', { desc = 'nvimtree toggle window' })
+map('n', '<leader>n', '<cmd>NvimTreeToggle<CR>', { desc = 'nvimtree toggle window' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`

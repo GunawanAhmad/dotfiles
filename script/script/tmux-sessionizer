@@ -18,8 +18,18 @@ if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
     exit 0
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
+if ! tmux has-session -t=$selected_name 2>/dev/null; then
     tmux new-session -ds $selected_name -c $selected
+fi
+
+if [[ $selected_name == "padelva-service" ]]; then
+    tmux rename-window -t $selected_name:0 "Neovim"
+    tmux new-window -t $selected_name:1 -n "main-service" -c "$selected/apps/padelva" -d
+    tmux new-window -t $selected_name:2 -n "chico-service" -c "$selected/apps/chico" -d
+    tmux new-window -t $selected_name:3 -n "streaming-worker" -c "$selected/apps/streaming-worker" -d
+elif [[ $selected_name == "padelva-frontend" ]]; then
+    tmux rename-window -t $selected_name:0 "Neovim"
+    tmux new-window -t $selected_name:1 -n "pnpm" -c "$selected/apps/frontend" -d
 fi
 
 tmux switch-client -t $selected_name

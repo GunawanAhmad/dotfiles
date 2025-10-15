@@ -47,6 +47,10 @@ require('lazy').setup({
   require 'plugins.codecompanion',
   require 'plugins.persistence',
   require 'plugins.lazygit',
+  require 'plugins.lazydocker',
+  require 'plugins.endpoint',
+  require 'plugins.distant',
+  -- require 'plugins.sidekick',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

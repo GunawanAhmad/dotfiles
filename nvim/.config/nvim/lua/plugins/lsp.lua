@@ -72,8 +72,12 @@ return {
     vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = 0,
       callback = function()
-        print 'Formatting...'
-        vim.lsp.buf.formatting_sync(nil, 1000)
+        local clients = vim.lsp.get_active_clients { bufnr = 0 }
+        if #clients > 0 then
+          vim.lsp.buf.format { async = false, timeout_ms = 1000 }
+        else
+          print 'No LSP client attached for formatting'
+        end
       end,
     })
 
@@ -81,8 +85,16 @@ return {
       vue_ls = {},
       vtsls = vtsls_config,
       -- ts_ls = ts_ls_config,
-      lua_ls = {},
-      gopls = {},
+      lua_ls = {
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { 'vim' },
+            },
+          },
+        },
+      },
+      -- gopls = {},
       eslint = {},
       clangd = {},
       golangci_lint_ls = {

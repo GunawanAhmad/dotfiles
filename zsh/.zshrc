@@ -1,3 +1,10 @@
+# zmodload zsh/zprof
+DISABLE_AUTO_UPDATE="true"
+DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_COMPFIX="true"
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+
 # Attach tmux if not already attached
 if [ -z "$TMUX" ]; then
   tmux attach || tmux new-session
@@ -17,7 +24,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -58,9 +64,12 @@ function crun() {
   gcc $1 -o ${1%.c}.out && ./${1%.c}.out && rm ./${1%.c}.out
 }
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# fnm
+FNM_PATH="/home/guns/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
 
 # bun completions
 [ -s "/home/guns/.bun/_bun" ] && source "/home/guns/.bun/_bun"
@@ -75,3 +84,4 @@ eval "$(zoxide init zsh)"
 
 
 export XDG_DESKTOP_PORTAL_IMPLEMENTATION=xdg-desktop-portal-wlr
+# zprof

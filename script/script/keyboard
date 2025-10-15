@@ -10,21 +10,12 @@ if [ -z "$1" ]; then
 fi
 
 MODE=$1
-ARGS_2=$2
 
 if [ "$MODE" -eq 1 ]; then
 	echo "Setting up personal mode..."
-	xrandr --output DP-2 --off --output eDP-1 --auto --primary # setting laptop screen as primary
 	setxkbmap -layout us
 elif [ "$MODE" -eq 2 ]; then
 	echo "Setting up office mode..."
-	xrandr --output eDP-1 --off --output DP-2 --mode 1920x1080 --rate 180.00 --primary # setting external monitor as primary
-
-	# if args is provided, skip keyboard remapping
-	if [ "$ARGS_2" == "skipkb" ]; then
-		echo "Skipping keyboard remapping as per argument."
-		exit 0
-	fi
 
 	# Clear existing modifier mappings
 	xmodmap -e "clear control"

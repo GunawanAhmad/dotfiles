@@ -1,0 +1,71 @@
+#!/bin/bash
+# filepath: monitor
+
+LOGFILE="/tmp/monitor-udev.log"
+log() {
+	echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >>"$LOGFILE"
+}
+
+MODE="$1"
+EXTERNAL_MONITOR=$(xrandr | grep " connected" | grep -v "eDP" | cut -d ' ' -f1)
+INTERNAL_MONITOR=$(xrandr | grep " connected" | grep "eDP" | cut -d ' ' -f1)
+
+log "Script called with argument: '$MODE'"
+log "Detected internal: '$INTERNAL_MONITOR', external: '$EXTERNAL_MONITOR'"
+
+if [ -z "$INTERNAL_MONITOR" ]; then
+	log "No internal monitor detected. Exiting."
+	exit 1
+fi
+
+# If no external monitor, always switch to internal only
+if [ -z "$EXTERNAL_MONITOR" ]; then
+	xrandr --output "$INTERNAL_MONITOR" --auto --primary
+	for output in $(xrandr | grep " connected" | grep -v "$INTERNAL_MONITOR" | cut -d ' ' -f1); do
+		xrandr --output "$output" --off
+	done
+	exit 0
+fi
+
+if [ -z "$MODE" ]; then
+	log "No mode argument provided. Detecting current mode."
+	# Detect which monitor is used as primary by checking xrandr output
+	if xrandr | grep "connected primary" | grep -q "$EXTERNAL_MONITOR"; then
+		log "External monitor is primary."
+		MODE="off"
+	else
+		log "Internal monitor is primary." 
+		MODE="primary"
+	fi
+fi
+
+case "$MODE" in
+mirror)
+	log "Setting mode: mirror"
+	xrandr --output "$EXTERNAL_MONITOR" --auto --primary --output "$INTERNAL_MONITOR" --mode 1920x1200 --same-as "$EXTERNAL_MONITOR"
+	;;
+left)
+	log "Setting mode: left"
+	xrandr --output "$EXTERNAL_MONITOR" --auto --primary --left-of "$INTERNAL_MONITOR" --output "$INTERNAL_MONITOR" --auto
+	;;
+right)
+	log "Setting mode: right"
+	xrandr --output "$EXTERNAL_MONITOR" --auto --primary --right-of "$INTERNAL_MONITOR" --output "$INTERNAL_MONITOR" --auto
+	;;
+primary)
+	log "Setting mode: primary"
+	xrandr --output "$EXTERNAL_MONITOR" --auto --primary --output "$INTERNAL_MONITOR" --off
+	;;
+off)
+	log "Setting mode: off"
+	xrandr --output "$INTERNAL_MONITOR" --auto --primary --output "$EXTERNAL_MONITOR" --off
+	;;
+*)
+	# Default to mirror if argument is missing or invalid
+	log "Invalid or missing argument. Defaulting to mirror."
+	xrandr --output "$EXTERNAL_MONITOR" --auto --primary --output "$INTERNAL_MONITOR" --auto --same-as "$EXTERNAL_MONITOR"
+	;;
+esac
+
+log "Monitor setup complete."
+exit 0
