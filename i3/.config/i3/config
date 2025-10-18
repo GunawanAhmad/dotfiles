@@ -206,8 +206,6 @@ default_floating_border pixel 1
 
 # Startup app
 exec --no-startup-id sh -c 'sleep 0.2; i3-msg "workspace $ws1; exec kitty"'
-exec --no-startup-id sh -c 'sleep 0.4; i3-msg "workspace $ws2; exec brave-browser"'
-exec --no-startup-id sh -c 'sleep 0.8; i3-msg "workspace $ws7; exec slack"'
 
 focus_on_window_activation focus
 
