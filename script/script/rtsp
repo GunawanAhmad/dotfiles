@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+set -e
+
+RTSP_HOST="127.0.0.1"
+CAM_DEVICE="/dev/video0"
+LOCAL_IP="192.168.1.64"
+PID_FILE="/tmp/ffmpeg_rtsp.pid"
+MTX_CONTAINER="mediamtx"
+
+start() {
+    # Start MediaMTX if not running
+    if docker ps --format '{{.Names}}' | grep -q "^${MTX_CONTAINER}$"; then
+        : # container already running
+    elif nc -z "$RTSP_HOST" 8554 2>/dev/null; then
+        : # port already active (assume MediaMTX)
+    else
+        docker run --rm -d \
+        -e MTX_RTSPTRANSPORTS=tcp \
+        -e MTX_WEBRTCADDITIONALHOSTS=192.168.x.x \
+        -p 8554:8554 \
+        bluenviron/mediamtx:1
+
+        # Wait until MediaMTX is ready
+        for i in {1..10}; do
+            if nc -z "$RTSP_HOST" 8554 2>/dev/null; then
+                break
+            fi
+            sleep 1
+        done
+    fi
+
+    # If still not up, fail
+    if ! nc -z "$RTSP_HOST" 8554 2>/dev/null; then
+        echo "MediaMTX failed to start."
+        exit 1
+    fi
+    
+    # Start FFmpeg to stream to MediaMTX
+    ffmpeg \
+        -f v4l2 -input_format mjpeg -i "$CAM_DEVICE" \
+        -f pulse -i default \
+        -c:v libx264 -preset ultrafast \
+        -c:a aac -b:a 128k -ac 1 \
+        -f rtsp "rtsp://$RTSP_HOST:8554/cam" \
+        >/dev/null 2>&1 &
+
+    echo $! > "$PID_FILE"
+    echo "$!"
+}
+
+stop() {
+    if [ ! -f "$PID_FILE" ]; then
+        echo "FFmpeg PID file not found."
+        exit 1
+    fi
+
+    PID=$(cat "$PID_FILE")
+
+    if kill -0 "$PID" 2>/dev/null; then
+        kill "$PID"
+    fi
+
+    rm -f "$PID_FILE"
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    *)
+        echo "Usage: $0 {start|stop}"
+        ;;
+esac

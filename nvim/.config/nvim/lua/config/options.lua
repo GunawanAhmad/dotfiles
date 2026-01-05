@@ -74,3 +74,31 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Render images in buffer when opened
+vim.api.nvim_create_autocmd("BufReadCmd", {
+  pattern = { "*.png", "*.jpg", "*.jpeg", "*.webp", "*.gif" },
+  callback = function(args)
+    local image = require("image")
+
+    -- mark buffer as binary-like
+    vim.bo.binary = true
+    vim.bo.bufhidden = "wipe"
+    vim.bo.swapfile = false
+    vim.bo.modifiable = false
+    vim.bo.readonly = true
+
+    -- clear previous images in this window
+    image.clear()
+
+    -- render image
+    image.from_file(args.file, {
+      window = vim.api.nvim_get_current_win(),
+    })
+  end,
+})
+
+vim.api.nvim_create_user_command('Ti', function()
+  print(os.date '%H:%M')
+end, { desc = 'Display the current time' })
+

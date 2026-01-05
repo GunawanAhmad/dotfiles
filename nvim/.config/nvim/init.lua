@@ -14,13 +14,12 @@ require 'config.mappings'
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
-  { 'Bilal2453/luvit-meta', lazy = true },
+  { 'Bilal2453/luvit-meta',     lazy = true },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-
   require 'plugins.autopairs',
-  require 'plugins.themes.gruvbox',
+  require 'plugins.themes.gruvbox-material',
   -- require 'plugins.themes.kanagawa-paper',
   -- require 'plugins.catppucin'
   require 'plugins.nvim-tree',
@@ -50,7 +49,9 @@ require('lazy').setup({
   require 'plugins.lazydocker',
   require 'plugins.endpoint',
   require 'plugins.distant',
-  -- require 'plugins.sidekick',
+  require 'plugins.indent-blankline',
+  -- require 'plugins.supermaven',
+  require 'plugins.image',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
@@ -70,7 +71,3 @@ require('lazy').setup({
     },
   },
 })
-
-vim.api.nvim_create_user_command('Ti', function()
-  print(os.date '%H:%M')
-end, { desc = 'Display the current time' })

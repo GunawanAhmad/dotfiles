@@ -37,7 +37,8 @@ return {
     vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'Information' })
     vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'Hint' })
 
-    local vue_language_server_path = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server'
+    local vue_language_server_path = vim.fn.expand '$MASON/packages' ..
+        '/vue-language-server' .. '/node_modules/@vue/language-server'
     local tsserver_filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
     local vue_plugin = {
       name = '@vue/typescript-plugin',
@@ -83,8 +84,8 @@ return {
 
     local config = {
       vue_ls = {},
+      svelte = {},
       vtsls = vtsls_config,
-      -- ts_ls = ts_ls_config,
       lua_ls = {
         settings = {
           Lua = {
@@ -94,12 +95,15 @@ return {
           },
         },
       },
-      -- gopls = {},
+      gopls = {},
       eslint = {},
       clangd = {},
       golangci_lint_ls = {
         filetypes = { 'go', 'gomod' },
       },
+      rust_analyzer = {},
+      unocss = {},
+      pyright = {},
     }
 
     -- load each config into the lsp
@@ -113,10 +117,14 @@ return {
       ensure_installed = {
         'vue-language-server',
         'lua-language-server',
+        'svelte-language-server',
         'gopls',
         'eslint',
         'clangd',
         'golangci-lint',
+        'rust-analyzer',
+        'unocss-language-server',
+        'sql-formatter'
       },
     }
     local ensure_installed = vim.tbl_keys(config or {})

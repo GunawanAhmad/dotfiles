@@ -28,6 +28,10 @@ elif [ "$MODE" -eq 2 ]; then
 	# Re-add modifiers
 	xmodmap -e "add control = Control_L Control_R"
 	xmodmap -e "add mod1 = Alt_R Meta_R"
+elif [ "$MODE" -eq 3 ]; then
+	# switch caps lock and escape
+	echo "Setting up coding mode..."
+	setxkbmap -option caps:swapescape
 else
 	echo "Invalid mode. Use 1 for personal mode or 2 for office mode."
 	exit 1

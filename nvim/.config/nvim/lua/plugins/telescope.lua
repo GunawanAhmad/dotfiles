@@ -4,40 +4,12 @@ return { -- Fuzzy Finder (files, lsp, etc)
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    -- { -- If encountering errors, see telescope-fzf-native README for installation instructions
-    --   'nvim-telescope/telescope-fzy-native.nvim',
-    --
-    --   -- `build` is used to run some command when the plugin is installed/updated.
-    --   -- This is only run then, not every time Neovim starts up.
-    --   build = 'make',
-    -- },
-    {
-      'altermo/telescope-nucleo-sorter.nvim',
-      build = 'cargo build --release',
-      -- on macos, you may need below to make build work
-      -- build = 'cargo rustc --release -- -C link-arg=-undefined -C link-arg=dynamic_lookup',
-    },
     { 'nvim-telescope/telescope-ui-select.nvim' },
 
     -- Useful for getting pretty icons, but requires a Nerd Font.
-    { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+    { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
   },
   config = function()
-    require('telescope').setup {
-      extensions = {
-        ['ui-select'] = {
-          require('telescope.themes').get_dropdown(),
-        },
-      },
-      pickers = {
-        find_files = {
-          find_command = { 'rg', '--files', '--sortr=modified' },
-          hidden = true,
-          no_ignore = true,
-        },
-      },
-    }
-
     -- Enable Telescope extensions if they are installed
     -- pcall(require('telescope').load_extension, 'fzf')
 
@@ -49,22 +21,30 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
-    vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+    vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, { desc = '[F]ind [S]ymbols' })
     vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
     vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffers' })
-
-    -- Slightly advanced example of overriding default behavior and theme
-    vim.keymap.set('n', '<leader>/', function()
-      -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false,
+    vim.keymap.set('n', '<leader>fn', function()
+      builtin.lsp_document_symbols({
+        symbols = { 'Function', 'Method' }
       })
-    end, { desc = '[/] Fuzzily search in current buffer' })
+    end, { desc = '[F]ind [F]unctions/[M]ethods in current [M]odule' })
+
+    local function find_env_or_service_files()
+      builtin.find_files({
+        prompt_title = "Find Env or Service Files",
+        find_command = {
+          'rg', '--files', '--iglob', '*.env', '--iglob', '*service*account*.json', '--iglob', '*.env.*',
+        },
+      })
+    end
+
+    vim.keymap.set('n', '<leader>fe', find_env_or_service_files, { desc = '[F]ind [.env/service-] files' })
+
 
     -- It's also possible to pass additional configuration options.
     --  See `:help telescope.builtin.live_grep()` for information about particular keys

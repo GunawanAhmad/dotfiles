@@ -45,3 +45,12 @@ map('n', '<C-a>', 'ggvG', { desc = 'Select all text' })
 
 map('n', '<leader>ai', '<cmd>CodeCompanionChat Toggle<CR>', { desc = '' })
 map('v', '<leader>cc', ":'<,'>CodeCompanion<CR>", { desc = '', noremap = true, silent = true })
+
+-- map esc in terminal to normal mode
+map('t', '<Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- find and replace in visual mode (global + confirm)
+vim.keymap.set('x', '<leader>rw',
+  'y:%s/\\V<C-r>"/',
+  { desc = 'Replace visual selection globally' }
+)

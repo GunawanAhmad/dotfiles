@@ -20,6 +20,7 @@ return {
     },
     preview = {
       enabled = false,
+      -- show_file_info = true,
     },
   },
   keys = {
