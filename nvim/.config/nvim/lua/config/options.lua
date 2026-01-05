@@ -103,8 +103,15 @@ vim.api.nvim_create_user_command('Ti', function()
 end, { desc = 'Display the current time' })
 
 -- set fold
+-- TODO: use syntax highlighting for folds
 vim.opt.foldenable = true
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldlevel = 99
+vim.opt.foldtext = 'v:lua.MyFoldText()'
 
+function MyFoldText()
+  local line = vim.fn.getline(vim.v.foldstart)
+  local nLines = vim.v.foldend - vim.v.foldstart + 1
+  return '⯈ ' .. line .. ' ... ' .. nLines .. ' lines '
+end
