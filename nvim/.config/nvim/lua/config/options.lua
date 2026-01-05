@@ -102,3 +102,9 @@ vim.api.nvim_create_user_command('Ti', function()
   print(os.date '%H:%M')
 end, { desc = 'Display the current time' })
 
+-- set fold
+vim.opt.foldenable = true
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldlevel = 99
+
