@@ -104,6 +104,7 @@ return {
       rust_analyzer = {},
       unocss = {},
       pyright = {},
+      yamlls = {},
     }
 
     -- load each config into the lsp
@@ -124,7 +125,8 @@ return {
         'golangci-lint',
         'rust-analyzer',
         'unocss-language-server',
-        'sql-formatter'
+        'sql-formatter',
+        'yaml-language-server',
       },
     }
     local ensure_installed = vim.tbl_keys(config or {})
