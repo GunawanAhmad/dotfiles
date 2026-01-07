@@ -104,7 +104,7 @@ end, { desc = 'Display the current time' })
 
 -- set fold
 -- TODO: use syntax highlighting for folds
-vim.opt.foldenable = true
+vim.opt.foldenable = false -- disable folding at start, use "za" to toggle
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldlevel = 99
