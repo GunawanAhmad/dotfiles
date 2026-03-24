@@ -34,7 +34,7 @@ require('lazy').setup({
   require 'plugins.lsp',
   require 'plugins.treesitter',
   require 'plugins.startup',
-  require 'plugins.copilot',
+  -- require 'plugins.copilot',
   require 'plugins.debugprint',
   require 'plugins.nvim-colorizer',
   require 'plugins.flash',
@@ -50,8 +50,11 @@ require('lazy').setup({
   require 'plugins.endpoint',
   require 'plugins.distant',
   require 'plugins.indent-blankline',
-  -- require 'plugins.supermaven',
+  require 'plugins.supermaven',
   require 'plugins.image',
+  require 'plugins.lazysql',
+  require 'plugins.eslint',
+  require 'plugins.grug',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

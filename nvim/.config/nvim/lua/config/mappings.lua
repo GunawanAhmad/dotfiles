@@ -41,7 +41,7 @@ map('n', '<C-h>', vim.lsp.buf.hover, { desc = 'Hover definition' })
 map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = 'Open diagnostic on popup' })
 
 -- Select all
-map('n', '<C-a>', 'ggvG', { desc = 'Select all text' })
+map('n', '<C-a>', 'ggVG', { desc = 'Select all text' })
 
 map('n', '<leader>ai', '<cmd>CodeCompanionChat Toggle<CR>', { desc = '' })
 map('v', '<leader>cc', ":'<,'>CodeCompanion<CR>", { desc = '', noremap = true, silent = true })
@@ -54,3 +54,5 @@ vim.keymap.set('x', '<leader>rw',
   'y:%s/\\V<C-r>"/',
   { desc = 'Replace visual selection globally' }
 )
+
+vim.keymap.set("n", "<leader>ls", "<cmd>LazySql<CR>", { desc = "Toggle LazySql", noremap = true, silent = true })

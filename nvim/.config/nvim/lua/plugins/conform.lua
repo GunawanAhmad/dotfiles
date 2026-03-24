@@ -1,6 +1,6 @@
 local function jsFormat()
-  if vim.fn.exists ':LspEslintFixAll' == 2 then
-    vim.cmd 'LspEslintFixAll'
+  if vim.fn.exists ':EslintFixAll' == 2 then
+    vim.cmd 'EslintFixAll'
   end
   return {}
 end

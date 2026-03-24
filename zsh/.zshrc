@@ -43,12 +43,6 @@ alias n="nvim"
 alias lg="lazygit"
 alias ld="lazydocker"
 
-# add go to env var
-export PATH=$PATH:/usr/local/go/bin
-
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$(go env GOPATH)/bin
-
 # add emacs doom to path
 export PATH=$PATH:$HOME/.config/emacs/bin
 
@@ -63,6 +57,9 @@ alias n="nvim"
 
 #shortcut for pnpm
 alias pd="pnpm dev"
+
+#shourtcut for bun
+alias bd="bun dev"
 
 function crun() {
   gcc $1 -o ${1%.c}.out && ./${1%.c}.out && rm ./${1%.c}.out
@@ -86,6 +83,9 @@ eval "$(zoxide init zsh)"
 
 # alias cd="z"
 
+export PATH="$HOME/.local/bin:$PATH"
 
 export XDG_DESKTOP_PORTAL_IMPLEMENTATION=xdg-desktop-portal-wlr
 # zprof
+. "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/completions/asdf.bash"

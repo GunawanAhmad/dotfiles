@@ -32,10 +32,15 @@ elif [[ $selected_name == "padelva-frontend" ]]; then
     tmux new-window -t $selected_name:1 -n "pnpm" -c "$selected/apps/frontend" -d
 elif [[ $selected_name == "courtsee-platform" ]]; then
     tmux rename-window -t $selected_name:0 "Neovim"
-    tmux new-window -t $selected_name:1 -n "Centro" -c "$selected/apps/centro" -d
+    tmux new-window -t $selected_name:1 -n "Dev" -c "$selected" -d
     tmux new-window -t $selected_name:2 -n "chico" -c "$selected/apps/chico" -d
     tmux new-window -t $selected_name:3 -n "Rio" -c "$selected/apps/rio" -d
     tmux new-window -t $selected_name:3 -n "Vista" -c "$selected/apps/vista" -d
+elif [[ $selected_name == "gudang" ]]; then
+    tmux rename-window -t $selected_name:0 "Neovim"
+    tmux new-window -t $selected_name:1 -n "Dev" -c "$selected" -d
+    tmux new-window -t $selected_name:2 -n "Playground" -c "$selected" -d
+
 fi
 
 tmux switch-client -t $selected_name

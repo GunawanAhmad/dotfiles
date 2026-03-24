@@ -1,6 +1,9 @@
 return {
-  dir = '/home/guns/code/porn/fff.nvim',
-  build = 'cargo build --release',
+  'dmtrKovalenko/fff.nvim',
+  commit = '64861f8142c5ce8c34f9ec73a3d084857182e156',
+  build = function()
+    require('fff.download').download_or_build_binary()
+  end,
   -- or if you are using nixos
   -- build = "nix run .#release",
   opts = {
@@ -10,7 +13,7 @@ return {
       move_down = { '<C-j>', '<Down>' },
     },
     debug = {
-      enabled = false,
+      enabled = true,
       show_scores = false,
     },
     title = 'Find files',
