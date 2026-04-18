@@ -22,6 +22,7 @@ require('lazy').setup({
   require 'plugins.themes.gruvbox-material',
   -- require 'plugins.themes.kanagawa-paper',
   -- require 'plugins.catppucin'
+  -- require 'plugins.themes.token',
   require 'plugins.nvim-tree',
 
   require 'plugins.gitsigns',
@@ -55,6 +56,8 @@ require('lazy').setup({
   require 'plugins.lazysql',
   require 'plugins.eslint',
   require 'plugins.grug',
+  require 'plugins.todo',
+  require 'plugins.nx',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

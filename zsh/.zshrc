@@ -61,6 +61,8 @@ alias pd="pnpm dev"
 #shourtcut for bun
 alias bd="bun dev"
 
+alias mati="shutdown -h now"
+
 function crun() {
   gcc $1 -o ${1%.c}.out && ./${1%.c}.out && rm ./${1%.c}.out
 }
@@ -89,3 +91,4 @@ export XDG_DESKTOP_PORTAL_IMPLEMENTATION=xdg-desktop-portal-wlr
 # zprof
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"
+export PATH=$PATH:$HOME/.local/bin

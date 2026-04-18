@@ -56,3 +56,6 @@ vim.keymap.set('x', '<leader>rw',
 )
 
 vim.keymap.set("n", "<leader>ls", "<cmd>LazySql<CR>", { desc = "Toggle LazySql", noremap = true, silent = true })
+
+--nx
+map('n', '<leader>nx', '<cmd>NxPick<cr>', { desc = 'Select nx command' })
