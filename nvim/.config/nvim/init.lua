@@ -58,6 +58,7 @@ require('lazy').setup({
   require 'plugins.grug',
   require 'plugins.todo',
   require 'plugins.nx',
+  require 'plugins.claudecode',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

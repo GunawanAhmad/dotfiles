@@ -92,3 +92,6 @@ export XDG_DESKTOP_PORTAL_IMPLEMENTATION=xdg-desktop-portal-wlr
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"
 export PATH=$PATH:$HOME/.local/bin
+
+# asdf golang packages
+export PATH=$PATH:$(go env GOBIN)

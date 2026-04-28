@@ -1,5 +1,6 @@
 return {
-  'gunawanahmad/todo.nvim',
+  -- 'gunawanahmad/todo.nvim',
+  dir = '~/code/porn/todo.nvim',
   name = "todo.nvim",
   config = function()
     require("todo").setup({

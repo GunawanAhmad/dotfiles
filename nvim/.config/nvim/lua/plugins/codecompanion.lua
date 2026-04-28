@@ -1,6 +1,12 @@
 return {
   'olimorris/codecompanion.nvim',
   opts = {
+    interactions = {
+      chat = {
+        adapter = 'anthropic',
+        model = 'opus-3',
+      }
+    },
     integrations = {
       telescope = false
     },
