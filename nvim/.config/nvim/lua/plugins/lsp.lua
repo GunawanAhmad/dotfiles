@@ -103,8 +103,9 @@ return {
       rust_analyzer = {},
       unocss = {},
       tailwindcss = {},
-      pyright = {},
+      pyrefly = {},
       yamlls = {},
+      ruff = {}
     }
 
     -- load each config into the lsp
@@ -127,6 +128,8 @@ return {
         'tailwindcss-language-server',
         'sql-formatter',
         'yaml-language-server',
+        'pyrefly',
+        'ruff',
       },
     }
     local ensure_installed = vim.tbl_keys(config or {})

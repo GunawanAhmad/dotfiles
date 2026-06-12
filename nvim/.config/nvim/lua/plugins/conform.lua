@@ -31,6 +31,7 @@ return { -- Autoformat
       typescriptreact = jsFormat,
       vue = jsFormat,
       bash = { 'shfmt' },
+      python = { 'ruff_format' },
     },
     format_on_save = {
       timeout_ms = 500,

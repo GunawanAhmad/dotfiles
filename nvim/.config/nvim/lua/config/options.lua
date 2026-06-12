@@ -8,7 +8,6 @@ vim.g.have_nerd_font = true
 -- make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.mouse = ''
 vim.opt.linebreak = true
 
 -- don't show the mode, since it's already in the status line

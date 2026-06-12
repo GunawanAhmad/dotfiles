@@ -79,6 +79,9 @@ bindsym Print exec --no-startup-id "flameshot gui"
 # change monitor
 bindsym $mod+m exec "/home/guns/dotfiles/script/script/monitor"
 
+# clipboard manager
+bindsym $mod+Shift+v exec --no-startup-id "diodon"
+
 # change focus
 bindsym $mod+j focus down
 bindsym $mod+k focus up

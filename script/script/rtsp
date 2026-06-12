@@ -44,8 +44,8 @@ start() {
     ffmpeg \
         -f v4l2 -input_format mjpeg -i "$CAM_DEVICE" \
         -f pulse -i default \
-        -c:v libx264 -preset ultrafast \
-        -c:a aac -b:a 128k -ac 1 \
+        -c:v mpeg1video -b:v 1M \
+        -c:a pcm_mulaw -ar 8000 -ac 1 \
         -f rtsp "rtsp://$RTSP_HOST:8554/cam" \
         >/dev/null 2>&1 &
 

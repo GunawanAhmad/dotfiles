@@ -1,4 +1,5 @@
 return {
+  -- dir = '/home/guns/code/porn/fff.nvim',
   'dmtrKovalenko/fff.nvim',
   build = function()
     require('fff.download').download_or_build_binary()
@@ -21,7 +22,7 @@ return {
       width = 0.8,
     },
     preview = {
-      enabled = false,
+      enabled = true,
       show_file_info = true,
     },
   },
