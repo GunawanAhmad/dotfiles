@@ -1,13 +1,18 @@
-return {
-  -- dir = '/home/guns/code/porn/fff.nvim',
-  'dmtrKovalenko/fff.nvim',
-  build = function()
-    require('fff.download').download_or_build_binary()
+vim.pack.add({
+  "https://github.com/dmtrKovalenko/fff",
+})
+
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    if name == 'fff.nvim' and (kind == 'install' or kind == 'update') then
+      if not ev.data.active then vim.cmd.packadd('fff.nvim') end
+      require('fff.download').download_or_build_binary()
+    end
   end,
-  -- or if you are using nixos
-  -- build = "nix run .#release",
-  opts = {
-    -- pass here all the options
+})
+
+vim.g.fff = {
     keymaps = {
       move_up = { '<C-k>', '<Up>' },
       move_down = { '<C-j>', '<Down>' },
@@ -24,26 +29,8 @@ return {
     preview = {
       enabled = true,
       show_file_info = true,
-    },
-  },
-  keys = {
-    {
-      'ff',
-      function()
-        require('fff').find_files() -- or find_in_git_root() if
-      end,
-      desc = 'Open file picker',
-    },
-    { "fg", function() require('fff').live_grep() end, desc = 'LiFFFe grep' },
-    {
-      "fz",
-      function() require('fff').live_grep({ grep = { modes = { 'fuzzy', 'plain' } } }) end,
-      desc = 'Live fffuzy grep',
-    },
-    {
-      "fc",
-      function() require('fff').live_grep({ query = vim.fn.expand("<cword>") }) end,
-      desc = 'Search current word',
-    },
-  },
+    }
 }
+
+vim.keymap.set('n', 'ff', function() require('fff').find_files() end, { desc = 'FFFind files' })
+vim.keymap.set('n', 'fg', function() require('fff').live_grep() end, { desc = 'FFFind grep' })

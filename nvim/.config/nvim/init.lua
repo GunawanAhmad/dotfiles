@@ -1,80 +1,25 @@
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
-  if vim.v.shell_error ~= 0 then
-    error('Error cloning lazy.nvim:\n' .. out)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
-
 require 'config.options'
 require 'config.mappings'
 
-require('lazy').setup({
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-
-  { 'Bilal2453/luvit-meta',     lazy = true },
-
-  -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-  require 'plugins.autopairs',
-  require 'plugins.themes.gruvbox-material',
-  -- require 'plugins.themes.kanagawa-paper',
-  -- require 'plugins.catppucin'
-  -- require 'plugins.themes.token',
-  require 'plugins.nvim-tree',
-
-  require 'plugins.gitsigns',
-  require 'plugins.lualine',
-  require 'plugins.which-key',
-  require 'plugins.telescope',
-  require 'plugins.conform',
-  require 'plugins.cmp',
-  require 'plugins.mini',
-  require 'plugins.lsp',
-  require 'plugins.treesitter',
-  require 'plugins.startup',
-  -- require 'plugins.copilot',
-  require 'plugins.debugprint',
-  require 'plugins.nvim-colorizer',
-  require 'plugins.flash',
-  require 'plugins.yazi',
-  require 'plugins.render-markdown',
-  require 'plugins.snipe',
-  require 'plugins.discord-presence',
-  require 'plugins.fff',
-  require 'plugins.codecompanion',
-  require 'plugins.persistence',
-  require 'plugins.lazygit',
-  require 'plugins.lazydocker',
-  require 'plugins.endpoint',
-  require 'plugins.distant',
-  require 'plugins.indent-blankline',
-  require 'plugins.supermaven',
-  require 'plugins.image',
-  require 'plugins.lazysql',
-  require 'plugins.eslint',
-  require 'plugins.grug',
-  require 'plugins.todo',
-  require 'plugins.nx',
-  require 'plugins.claudecode',
-}, {
-  ui = {
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = '⌘',
-      config = '🛠',
-      event = '📅',
-      ft = '📂',
-      init = '⚙',
-      keys = '🗝',
-      plugin = '🔌',
-      runtime = '💻',
-      require = '🌙',
-      source = '📄',
-      start = '🚀',
-      task = '📌',
-      lazy = '💤 ',
-    },
-  },
-})
+-- Plugins
+require 'plugins.fff'
+require 'plugins.nvim-tree'
+require 'plugins.themes.gruvbox-material'
+require 'plugins.supermaven'
+require 'plugins.persistence'
+require 'plugins.cmp'
+require 'plugins.telescope'
+require 'plugins.lsp'
+require 'plugins.conform'
+require 'plugins.vim-sleuth'
+require 'plugins.lazygit'
+require 'plugins.which-key'
+require 'plugins.indent-blankline'
+require 'plugins.lualine'
+require 'plugins.snipe'
+require 'plugins.codecompanion'
+require 'plugins.autopairs'
+require 'plugins.eslint'
+require 'plugins.image'
+require 'plugins.gitsigns'
+require 'plugins.render-markdown'

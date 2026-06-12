@@ -1,7 +1,10 @@
-return {
-  'nvim-tree/nvim-tree.lua',
-  cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
-  opts = {
+vim.pack.add({
+  { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
+  { src = 'https://github.com/nvim-tree/nvim-tree.lua' },
+})
+
+
+require('nvim-tree').setup({
     filters = { dotfiles = false },
     disable_netrw = true,
     hijack_cursor = true,
@@ -38,5 +41,5 @@ return {
         },
       },
     },
-  },
-}
+})
+

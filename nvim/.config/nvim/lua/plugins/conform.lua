@@ -5,6 +5,40 @@ local function jsFormat()
   return {}
 end
 
+vim.pack.add {
+  'https://github.com/stevearc/conform.nvim',
+}
+
+require('conform').setup {
+  keys = {
+    {
+      '<leader>fm',
+      function()
+        require('conform').format { async = true, lsp_format = 'fallback' }
+      end,
+      mode = '',
+      desc = '[F]ormat buffer',
+    },
+  },
+  notify_on_error = false,
+  formatters_by_ft = {
+    lua = { 'stylua' },
+    sql = { 'sql_formatter' },
+    go = { 'goimports', 'gofmt' },
+    javascript = { 'eslint_d', 'prettier' },
+    typescript = { 'eslint_d', 'prettier' },
+    javascriptreact = { 'eslint_d', 'prettier' },
+    typescriptreact = { 'eslint_d', 'prettier' },
+    vue = { 'eslint_d', 'prettier' },
+    bash = { 'shfmt' },
+    python = { 'ruff_format' },
+  },
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_format = 'never',
+  },
+}
+
 return { -- Autoformat
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },

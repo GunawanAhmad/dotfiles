@@ -43,19 +43,15 @@ map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = 'Open
 -- Select all
 map('n', '<C-a>', 'ggVG', { desc = 'Select all text' })
 
-map('n', '<leader>ai', '<cmd>CodeCompanionChat Toggle<CR>', { desc = '' })
 map('v', '<leader>cc', ":'<,'>CodeCompanion<CR>", { desc = '', noremap = true, silent = true })
 
 -- map esc in terminal to normal mode
 map('t', '<Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- find and replace in visual mode (global + confirm)
-vim.keymap.set('x', '<leader>rw',
-  'y:%s/\\V<C-r>"/',
-  { desc = 'Replace visual selection globally' }
-)
+vim.keymap.set('x', '<leader>rw', 'y:%s/\\V<C-r>"/', { desc = 'Replace visual selection globally' })
 
-vim.keymap.set("n", "<leader>ls", "<cmd>LazySql<CR>", { desc = "Toggle LazySql", noremap = true, silent = true })
+vim.keymap.set('n', '<leader>ls', '<cmd>LazySql<CR>', { desc = 'Toggle LazySql', noremap = true, silent = true })
 
 --nx
 map('n', '<leader>nx', '<cmd>NxPick<cr>', { desc = 'Select nx command' })
