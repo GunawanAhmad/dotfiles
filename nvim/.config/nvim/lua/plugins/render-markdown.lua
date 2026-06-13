@@ -31,7 +31,7 @@ vim.api.nvim_create_autocmd('FileType', {
       vim.api.nvim_set_hl(0, group, settings)
     end
 
-    require('render-markdown.nvim').setup {
+    require('render-markdown').setup {
       heading = {
         hl_groups = {
           'RenderMarkdownH1Bg',

@@ -1,10 +1,18 @@
 vim.pack.add {
-  { src = 'https://github.com/neovim/nvim-lspconfig' },
-  { src = 'https://github.com/williamboman/mason.nvim' },
-  { src = 'https://github.com/williamboman/mason-lspconfig.nvim' },
-  { src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
-  { src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
+  'https://github.com/neovim/nvim-lspconfig',
+  'https://github.com/williamboman/mason.nvim',
+  'https://github.com/williamboman/mason-lspconfig.nvim',
+  'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
+  'https://github.com/hrsh7th/cmp-nvim-lsp',
 }
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'lua',
+  callback = function()
+    vim.pack.add { 'https://github.com/folke/lazydev.nvim' }
+    require('lazydev').setup {}
+  end,
+})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function()
@@ -53,16 +61,6 @@ local vtsls_config = {
   filetypes = tsserver_filetypes,
 }
 
--- local ts_ls_config = {
---   init_options = {
---     plugins = {
---       vue_plugin,
---     },
---   },
---   filetypes = tsserver_filetypes,
--- }
---
-
 vim.api.nvim_create_autocmd('BufWritePre', {
   buffer = 0,
   callback = function()
@@ -79,22 +77,7 @@ local config = {
   vue_ls = {},
   svelte = {},
   vtsls = vtsls_config,
-  lua_ls = {
-    settings = {
-      Lua = {
-        runtime = {
-          version = 'LuaJIT',
-        },
-        workspace = {
-          library = vim.api.nvim_get_runtime_file('', true),
-          checkThirdParty = false,
-        },
-        diagnostics = {
-          globals = { 'vim' },
-        },
-      },
-    },
-  },
+  lua_ls = {},
   gopls = {},
   clangd = {},
   golangci_lint_ls = {
