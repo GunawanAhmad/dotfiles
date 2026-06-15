@@ -1,8 +1,7 @@
-vim.pack.add({
-		'https://github.com/nvim-telescope/telescope.nvim',
-		'https://github.com/nvim-lua/plenary.nvim'
-})
-
+vim.pack.add {
+  'https://github.com/nvim-telescope/telescope.nvim',
+  'https://github.com/nvim-lua/plenary.nvim',
+}
 
 pcall(require('telescope').load_extension, 'nucleo')
 pcall(require('telescope').load_extension, 'ui-select')
@@ -20,34 +19,39 @@ vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
 vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffers' })
 vim.keymap.set('n', '<leader>fn', function()
-builtin.lsp_document_symbols({
-symbols = { 'Function', 'Method' }
-})
+  builtin.lsp_document_symbols {
+    symbols = { 'Function', 'Method' },
+  }
 end, { desc = '[F]ind [F]unctions/[M]ethods in current [M]odule' })
 
 local function find_env_or_service_files()
-builtin.find_files({
-prompt_title = "Find Env or Service Files",
-find_command = {
-  'rg', '--files', '--iglob', '*.env', '--iglob', '*service*account*.json', '--iglob', '*.env.*',
-},
-})
+  builtin.find_files {
+    prompt_title = 'Find Env or Service Files',
+    find_command = {
+      'rg',
+      '--files',
+      '--iglob',
+      '*.env',
+      '--iglob',
+      '*service*account*.json',
+      '--iglob',
+      '*.env.*',
+    },
+  }
 end
 
 vim.keymap.set('n', '<leader>fe', find_env_or_service_files, { desc = '[F]ind [.env/service-] files' })
 
-
 -- It's also possible to pass additional configuration options.
 --  See `:help telescope.builtin.live_grep()` for information about particular keys
 vim.keymap.set('n', '<leader>s/', function()
-builtin.live_grep {
-grep_open_files = true,
-prompt_title = 'Live Grep in Open Files',
-}
+  builtin.live_grep {
+    grep_open_files = true,
+    prompt_title = 'Live Grep in Open Files',
+  }
 end, { desc = '[S]earch [/] in Open Files' })
 
 -- Shortcut for searching your Neovim configuration files
 vim.keymap.set('n', '<leader>sn', function()
-builtin.find_files { cwd = vim.fn.stdpath 'config' }
+  builtin.find_files { cwd = vim.fn.stdpath 'config' }
 end, { desc = '[S]earch [N]eovim files' })
-
