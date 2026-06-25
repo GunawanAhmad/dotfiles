@@ -5,6 +5,12 @@ DISABLE_COMPFIX="true"
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+source /etc/os-release
+
+if [[ "$ID" == "arch" ]] && [[ -z "$WAYLAND_DISPLAY" ]]; then
+  exec start-hyprland
+fi
+
 # Attach tmux if not already attached
 if [ -z "$TMUX" ]; then
   tmux attach || tmux new-session
@@ -88,9 +94,6 @@ eval "$(zoxide init zsh)"
 export PATH="$HOME/.local/bin:$PATH"
 
 export XDG_DESKTOP_PORTAL_IMPLEMENTATION=xdg-desktop-portal-wlr
-# zprof
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
 export PATH=$PATH:$HOME/.local/bin
 
 # asdf golang packages

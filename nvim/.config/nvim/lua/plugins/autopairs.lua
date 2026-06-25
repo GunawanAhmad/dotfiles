@@ -1,4 +1,11 @@
+local autopairs_loaded = false
+
 local function load_autopairs()
+  if autopairs_loaded then
+    return
+  end
+  autopairs_loaded = true
+
   vim.pack.add {
     'https://github.com/windwp/nvim-autopairs',
     'https://github.com/hrsh7th/nvim-cmp',
@@ -10,5 +17,6 @@ local function load_autopairs()
 end
 
 vim.api.nvim_create_autocmd('InsertEnter', {
+  once = true,
   callback = load_autopairs,
 })
