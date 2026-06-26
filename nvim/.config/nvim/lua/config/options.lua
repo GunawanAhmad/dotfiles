@@ -17,9 +17,9 @@ vim.opt.showmode = false
 --  schedule the setting after `uienter` because it can increase startup-time.
 --  remove this option if you want your os clipboard to remain independent.
 --  see `:help 'clipboard'`
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
-end)
+-- vim.schedule(function()
+--   vim.opt.clipboard = 'unnamedplus'
+-- end)
 
 -- enable break indent
 vim.opt.breakindent = true
@@ -75,14 +75,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Render images in buffer when opened
-vim.api.nvim_create_autocmd("BufReadCmd", {
-  pattern = { "*.png", "*.jpg", "*.jpeg", "*.webp", "*.gif" },
+vim.api.nvim_create_autocmd('BufReadCmd', {
+  pattern = { '*.png', '*.jpg', '*.jpeg', '*.webp', '*.gif' },
   callback = function(args)
-    local image = require("image")
+    local image = require 'image'
 
     -- mark buffer as binary-like
     vim.bo.binary = true
-    vim.bo.bufhidden = "wipe"
+    vim.bo.bufhidden = 'wipe'
     vim.bo.swapfile = false
     vim.bo.modifiable = false
     vim.bo.readonly = true
