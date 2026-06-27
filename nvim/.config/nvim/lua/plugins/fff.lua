@@ -18,6 +18,9 @@ vim.g.fff = {
   keymaps = {
     move_up = { '<C-k>', '<Up>' },
     move_down = { '<C-j>', '<Down>' },
+    preview_scroll_up = '<C-b>',
+    preview_scroll_down = 'C-f>',
+    cycle_forward_query = '<C-u>',
   },
   debug = {
     enabled = true,
