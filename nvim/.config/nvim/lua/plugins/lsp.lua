@@ -1,7 +1,6 @@
 vim.pack.add {
   'https://github.com/neovim/nvim-lspconfig',
   'https://github.com/williamboman/mason.nvim',
-  'https://github.com/williamboman/mason-lspconfig.nvim',
   'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
   'https://github.com/hrsh7th/cmp-nvim-lsp',
 }
@@ -15,14 +14,18 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function()
-    vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { desc = 'Go to definition' })
-    vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { desc = 'Go to references' })
-    vim.keymap.set('n', 'gI', require('telescope.builtin').lsp_implementations, { desc = 'Go to implementations' })
-    vim.keymap.set('n', 'rn', vim.lsp.buf.rename, { desc = 'Rename' })
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Action' })
-    vim.keymap.set('n', '<C-h>', vim.lsp.buf.hover, { desc = 'Hover' })
-    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostics' })
+  callback = function(event)
+    local map = function(keys, rhs, desc)
+      vim.keymap.set('n', keys, rhs, { buffer = event.buf, desc = desc })
+    end
+
+    map('gd', require('telescope.builtin').lsp_definitions, 'Go to definition')
+    map('gr', require('telescope.builtin').lsp_references, 'Go to references')
+    map('gI', require('telescope.builtin').lsp_implementations, 'Go to implementations')
+    map('rn', vim.lsp.buf.rename, 'Rename')
+    map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
+    map('<C-h>', vim.lsp.buf.hover, 'Hover')
+    map('<leader>e', vim.diagnostic.open_float, 'Show diagnostics')
   end,
 })
 
@@ -48,35 +51,21 @@ local vue_plugin = {
   configNamespace = 'typescript',
 }
 
-local vtsls_config = {
-  settings = {
-    vtsls = {
-      tsserver = {
-        globalPlugins = {
-          vue_plugin,
+local servers = {
+  vue_ls = {},
+  svelte = {},
+  vtsls = {
+    settings = {
+      vtsls = {
+        tsserver = {
+          globalPlugins = {
+            vue_plugin,
+          },
         },
       },
     },
+    filetypes = tsserver_filetypes,
   },
-  filetypes = tsserver_filetypes,
-}
-
-vim.api.nvim_create_autocmd('BufWritePre', {
-  buffer = 0,
-  callback = function()
-    local clients = vim.lsp.get_clients { bufnr = 0 }
-    if #clients > 0 then
-      vim.lsp.buf.format { async = false, timeout_ms = 1000 }
-    else
-      print 'No LSP client attached for formatting'
-    end
-  end,
-})
-
-local config = {
-  vue_ls = {},
-  svelte = {},
-  vtsls = vtsls_config,
   lua_ls = {},
   gopls = {},
   clangd = {},
@@ -89,44 +78,39 @@ local config = {
   pyrefly = {},
   yamlls = {},
   ruff = {},
-  stylua = {},
 }
 
--- load each config into the lsp
-for server, server_config in pairs(config) do
+local ensure_installed = {
+  'vue-language-server',
+  'svelte-language-server',
+  'vtsls',
+  'lua-language-server',
+  'gopls',
+  'clangd',
+  'golangci-lint-langserver',
+  'rust-analyzer',
+  'unocss-language-server',
+  'tailwindcss-language-server',
+  'pyrefly',
+  'yaml-language-server',
+  'ruff',
+  'stylua',
+  'sql-formatter',
+  'goimports',
+  'shfmt',
+  'tree-sitter-cli',
+}
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+for server, server_config in pairs(servers) do
+  server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
   vim.lsp.config(server, server_config)
-  -- enable the server
-  vim.lsp.enable { server }
+  vim.lsp.enable(server)
 end
 
-require('mason').setup {
-  ensure_installed = {
-    'vue-language-server',
-    'lua-language-server',
-    'svelte-language-server',
-    'gopls',
-    'clangd',
-    'golangci-lint',
-    'rust-analyzer',
-    'unocss-language-server',
-    'tailwindcss-language-server',
-    'sql-formatter',
-    'yaml-language-server',
-    'pyrefly',
-    'ruff',
-    'stylua',
-  },
-}
+require('mason').setup()
 
-local ensure_installed = vim.tbl_keys(config or {})
 require('mason-tool-installer').setup {
   ensure_installed = ensure_installed,
-}
-
-require('mason-lspconfig').setup {
-  handlers = {
-    function(server_name)
-      require('lspconfig')[server_name].setup { config }
-    end,
-  },
 }

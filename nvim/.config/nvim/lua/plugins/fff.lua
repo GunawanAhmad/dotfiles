@@ -1,5 +1,5 @@
 vim.pack.add {
-  'https://github.com/dmtrKovalenko/fff',
+  'https://github.com/dmtrKovalenko/fff.nvim',
 }
 
 vim.api.nvim_create_autocmd('PackChanged', {
@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 })
 
 vim.g.fff = {
+  lazy_sync = true,
   keymaps = {
     move_up = { '<C-k>', '<Up>' },
     move_down = { '<C-j>', '<Down>' },

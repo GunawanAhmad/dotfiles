@@ -32,6 +32,10 @@
       "rev": "0a953ab918e9485a2f8ce566ea23030585b885c0",
       "src": "https://github.com/dmtrKovalenko/fff"
     },
+    "fff.nvim": {
+      "rev": "a0008b1cde4ce8f29cbdf63b52fde1ab7d0f7f6f",
+      "src": "https://github.com/dmtrKovalenko/fff.nvim"
+    },
     "flash.nvim": {
       "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
       "src": "https://github.com/folke/flash.nvim"
