@@ -7,13 +7,15 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 source /etc/os-release
 
+export PATH="$HOME/.local/bin:$PATH"
+
 if [[ "$ID" == "arch" ]] && [[ -z "$WAYLAND_DISPLAY" ]]; then
   exec start-hyprland
 fi
 
-# Attach tmux if not already attached
-if [ -z "$TMUX" ]; then
-  tmux attach || tmux new-session
+# Attach Herdr if not already inside a Herdr pane.
+if [[ -z "$HERDR_ENV" && -z "$HERDR_PANE_ID" && -z "$HERDR_SOCKET_PATH" ]] && command -v herdr >/dev/null 2>&1; then
+  exec herdr
 fi
 
 # enable vi mode
@@ -48,6 +50,7 @@ alias n="nvim"
 
 alias lg="lazygit"
 alias ld="lazydocker"
+alias hs="herdr-sessionizer"
 
 # add emacs doom to path
 export PATH=$PATH:$HOME/.config/emacs/bin

@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find ~/code/porn ~/code/work/ ~/dotfiles/nvim/.config/ ~/Documents/ -mindepth 1 -maxdepth 1 -type d 2>/dev/null | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+
+focus_or_create_workspace() {
+    local existing_id
+    existing_id=$(
+        herdr workspace list |
+            jq -r --arg label "$selected_name" '.result.workspaces[]? | select(.label == $label) | .workspace_id' |
+            head -n 1
+    )
+
+    if [[ -n $existing_id ]]; then
+        herdr workspace focus "$existing_id" >/dev/null
+        return 0
+    fi
+
+    herdr workspace create --cwd "$selected" --label "$selected_name" --focus
+}
+
+rename_tab() {
+    local tab_id=$1
+    local label=$2
+
+    herdr tab rename "$tab_id" "$label" >/dev/null
+}
+
+create_tab() {
+    local workspace_id=$1
+    local label=$2
+    local cwd=$3
+
+    if [[ -d $cwd ]]; then
+        herdr tab create --workspace "$workspace_id" --cwd "$cwd" --label "$label" --no-focus >/dev/null
+    fi
+}
+
+create_project_layout() {
+    local created_json workspace_id root_tab_id
+
+    created_json=$(focus_or_create_workspace)
+    if [[ -z $created_json ]]; then
+        return 0
+    fi
+
+    workspace_id=$(jq -r '.result.workspace.workspace_id' <<<"$created_json")
+    root_tab_id=$(jq -r '.result.tab.tab_id' <<<"$created_json")
+
+    case "$selected_name" in
+        padelva-service)
+            rename_tab "$root_tab_id" "Neovim"
+            create_tab "$workspace_id" "Command center" "$selected/apps/command-center"
+            create_tab "$workspace_id" "chico" "$selected/apps/chico"
+            create_tab "$workspace_id" "streaming-worker" "$selected/apps/streaming-worker"
+            ;;
+        padelva-frontend)
+            rename_tab "$root_tab_id" "Neovim"
+            create_tab "$workspace_id" "pnpm" "$selected/apps/frontend"
+            ;;
+        courtsee-platform)
+            rename_tab "$root_tab_id" "Neovim"
+            create_tab "$workspace_id" "Dev" "$selected"
+            create_tab "$workspace_id" "chico" "$selected/apps/chico"
+            create_tab "$workspace_id" "Rio" "$selected/apps/rio"
+            create_tab "$workspace_id" "Vista" "$selected/apps/vista"
+            ;;
+        perabotin)
+            rename_tab "$root_tab_id" "Neovim"
+            create_tab "$workspace_id" "Dev" "$selected"
+            create_tab "$workspace_id" "Playground" "$selected"
+            ;;
+        *)
+            rename_tab "$root_tab_id" "terminal"
+            ;;
+    esac
+}
+
+if [[ -n $HERDR_ENV || -n $HERDR_SOCKET_PATH ]]; then
+    create_project_layout
+    exit 0
+fi
+
+cd "$selected" || exit 1
+exec herdr --session "$selected_name"

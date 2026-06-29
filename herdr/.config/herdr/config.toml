@@ -1,0 +1,85 @@
+# Herdr config translated from the previous tmux setup.
+
+[theme]
+name = "terminal"
+auto_switch = false
+
+[theme.custom]
+accent = "#f5f5f5"
+panel_bg = "reset"
+surface0 = "#5a5a5a"
+surface1 = "#383838"
+surface_dim = "#383838"
+overlay0 = "#777777"
+overlay1 = "#bdbdbd"
+text = "#f5f5f5"
+subtext0 = "#cfcfcf"
+mauve = "#d9d9d9"
+green = "#cfcfcf"
+yellow = "#e0e0e0"
+red = "#ffffff"
+blue = "#d9d9d9"
+teal = "#c7c7c7"
+peach = "#e8e8e8"
+
+[terminal]
+new_cwd = "follow"
+
+[keys]
+prefix = "ctrl+x"
+detach = "prefix+q"
+reload_config = "prefix+shift+r"
+
+previous_tab = "prefix+p"
+next_tab = "prefix+n"
+switch_tab = "prefix+1..9"
+new_tab = ""
+close_tab = "prefix+x"
+
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+split_vertical = "prefix+v"
+split_horizontal = "prefix+minus"
+zoom = "prefix+z"
+resize_mode = "prefix+r"
+
+settings = ""
+workspace_picker = "prefix+s"
+toggle_sidebar = "prefix+b"
+
+navigate_workspace_up = "k"
+navigate_workspace_down = "j"
+navigate_pane_down = "ctrl+j"
+navigate_pane_up = "ctrl+k"
+
+[[keys.command]]
+key = "prefix+f"
+type = "pane"
+command = "/home/guns/dotfiles/script/script/herdr-sessionizer"
+
+[[keys.command]]
+key = "prefix+c"
+type = "shell"
+command = "herdr tab create --label terminal --focus"
+
+[ui]
+mouse_capture = true
+pane_borders = true
+pane_gaps = true
+confirm_close = true
+prompt_new_tab_name = false
+accent = "cyan"
+
+agent_panel_sort = "priority"
+
+[ui.toast]
+delivery = "herdr"
+
+[experimental]
+pane_history = false
+
+[ui.sound]
+enabled = false
